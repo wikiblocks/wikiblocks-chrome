@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+
+  "name": "wiki.bl.ocks",
+  "description": "This extension helps you find bl.ocks that are related to a Wikipedia page.",
+  "version": "1.0",
+	"content_scripts": [
+		{
+			"matches": ["https://en.wikipedia.org/wiki/*"],
+      "exclude_matches": ["https://en.wikipedia.org/wiki/Main_Page",
+                          "https://en.wikipedia.org/wiki/*:*"],
+      "css": ["content.css"],
+			"js": ["d3.min.js", "content.js"],
+      "run_at": "document_end"
+		}
+	],
+  "background": {
+    "scripts": ["xhr.js", "eventPage.js"],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "wiki.bl.ocks"
+  },
+  "permissions": [
+    "activeTab",
+    "<all_urls>"
+  ],
+  "icons": {
+            "19": "images/icon19_orange.png",
+            "38": "images/icon38_orange.png",
+            "48": "images/icon48_orange.png",
+            "64": "images/icon64_orange.png",
+            "128": "images/icon128_orange.png"
+  }
+}

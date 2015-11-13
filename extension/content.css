@@ -1,0 +1,23 @@
+
+/* temporary highlighting for visual inspection of elements found by content.js*/
+
+.wb-title {
+	background-color: yellow;
+}
+
+.wb-alias {
+	background-color: #FFC0CB;
+}
+
+#wb-sub:selected {
+	background-color: yellow;
+}
+
+a.wb-related-link {
+	background-color: yellow;
+}
+
+a.wb-category-link {
+	background-color: yellow;
+}
+
