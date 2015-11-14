@@ -60,6 +60,7 @@ window.onload = function() {
 			} else {
 				chrome.runtime.sendMessage({method: "inProgress"});
 				chrome.runtime.sendMessage({method: "queryForPage", page: page}, function(results) {
+					//data may have an error, which must be evaluated
 					data = results;
 					sendResponse(results);
 					chrome.runtime.sendMessage({method: 'ready'});

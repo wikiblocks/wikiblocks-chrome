@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		chrome.runtime.sendMessage({method: 'contentReady'});
 		return false;
 	} else if(message.method == 'queryForPage') {
-		queryResults(message.page, sendResponse);
+		query(message.page, sendResponse);
 		return true;
 	} else if(message.method == 'getPage') {
 		//Relay this message to the active tab for fulfillment; active tab caches page object
@@ -44,49 +44,20 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		);
 		return true;
 	} else if (message.method == 'clickedGist') {
-		//Popup caches its associated tab; query that tab for page object and call updateGist()
-		// chrome.tabs.sendMessage(message.tab.id, {method: 'getPage'}, null, function(page) {
-		// 	updateGist(message.gist, page, function(data) {
-		// 		console.log(data);
-		// 	});
-		// });
-		//return true;
-
+		// TODO
 		return false;
 	}
 
 	return false; // no async response fulfillment
 });
 
-
-/*
-	Package page as a property on the gist and send to the database.
-	Used to learn new information about a result that a user clicked.
-	e.g. new categories, new aliases for this particular gist
-*/
-function updateGist(gist, page, callback) {
-
-	var packagedGist = packageGistPage(gist, page);
-
-	var url = "http://127.0.0.1:3000/gist";
-
-	// cross-origin request
-	var request = xhr.json(url)
-	    .header("Content-Type", "application/json");
-
-	request.send("POST", JSON.stringify(packagedGist), function(response) {
-		callback(JSON.parse(response));
-	});
-}
-
 /*
 	Async call to server endpoint that posts a page object and expects an
 	array of gists as a response.
 */
-function queryResults(page, callback) {
+function query(page, callback) {
 
-	// localhost server on port 3000
-	var url = "http://127.0.0.1:3000/search";
+	var url = "http://wikiblocks.elasticbeanstalk.com/search";
 
 	// cross-origin request
 	var request = xhr.json(url)
@@ -96,11 +67,11 @@ function queryResults(page, callback) {
 		//TODO
 	})
 	
-	// POST to /wiki with JSON page information and get results in JSON format
+	// POST to /search with JSON page object and get results object
 	request.send("POST", JSON.stringify(page), function(error, response) {
 		if(error) {
 			var results = {};
-			results.error = {status: error.status, display: errorMessage(error.status)};
+			results.error = {status: error.status, display: "status " + error.status + ": " + errorMessage(error.status)};
 			callback(results);
 			return;
 		}
@@ -113,10 +84,10 @@ function errorMessage(code) {
 	var m = {
 		0: "There was a problem connecting to the server.",
 		500: "The server encountered an unexpected error.",
-		400: "Something went wrong witht the chrome extension on this article."
-	}
+		400: "Something went wrong with the Chrome extension on this article."
+	} 
 
-	return m[code];
+	return (m[code]) ? m[code] : "";
 }
 
 function packageGistPage(gist, page) {
