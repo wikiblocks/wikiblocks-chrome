@@ -57,7 +57,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 */
 function query(page, callback) {
 
-	var url = "http://wikiblocks.elasticbeanstalk.com/search";
+	var url = "http://cf1fcac0.ngrok.io/search";
 
 	// cross-origin request
 	var request = xhr.json(url)
