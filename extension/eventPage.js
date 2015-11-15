@@ -57,7 +57,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 */
 function query(page, callback) {
 
-	var url = "http://cf1fcac0.ngrok.io/search";
+	var url = "http://127.0.0.1:8081/search";
 
 	// cross-origin request
 	var request = xhr.json(url)
@@ -83,7 +83,9 @@ function query(page, callback) {
 function errorMessage(code) {
 	var m = {
 		0: "There was a problem connecting to the server.",
-		500: "The server encountered an unexpected error.",
+		500: "The server encountered an unexpected error while performing a search.",
+		502: "There was a problem connecting to the server.",
+		503: "The server is overloaded.",
 		400: "Something went wrong with the Chrome extension on this article."
 	} 
 
