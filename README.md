@@ -10,8 +10,9 @@ The extension uses information from a Wikipedia article to produce a list of rel
 Use the extension.crx
 
 
-![https://en.wikipedia.org/wiki/L-system](/images/prim_algorithm_recording.gif)
+![Rrim's algorithm recording](/images/prim_algorithm_recording.gif)
 
+![Map projections recording](/images/map_projections_recording.gif)
 
 
 Searching:
