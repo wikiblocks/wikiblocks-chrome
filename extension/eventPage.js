@@ -3,14 +3,11 @@
 */
 
 /*
-	Listen for messages from content scripts and popup scripts, and route asynchronous requests
-	for data from popup to the content script of the activeTab from which the request came.
+	Listen for messages from content scripts and popup scripts. Route asynchronous requests
+	for data from popup to the content script which has cached the data (i.e. results, page object).
 
-	Since the Popup may not be open, the eventPage coordinates communication in the event that Popup
-	needs information that is cached in the content script's local variables.
-
-	Concent script is able to monitor the state of it's progress in collecting data and caching a
-	search result.
+	The Content script is able to monitor the state of its progress in collecting data and caching a
+	search result. The page action icon is used as a visual indicator of the content script's status.
  */
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	if(message.method == 'showPageAction') {
@@ -57,7 +54,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 */
 function query(page, callback) {
 
-	var url = "http://127.0.0.1:8081/search";
+	var url = "http://wikiblocksalpha.elasticbeanstalk.com/search";
 
 	// cross-origin request
 	var request = xhr.json(url)
@@ -71,7 +68,7 @@ function query(page, callback) {
 	request.send("POST", JSON.stringify(page), function(error, response) {
 		if(error) {
 			var results = {};
-			results.error = {status: error.status, display: "status " + error.status + ": " + errorMessage(error.status)};
+			results.error = {status: error.status, display: errorMessage(error.status)};
 			callback(results);
 			return;
 		}
@@ -89,9 +86,11 @@ function errorMessage(code) {
 		400: "Something went wrong with the Chrome extension on this article."
 	} 
 
-	return (m[code]) ? m[code] : "";
+	return (m[code]) ? m[code] : "Error code with status" + code;
 }
 
+
+// used to send an object containing a gist that was clicked and its corresponding page
 function packageGistPage(gist, page) {
 	var obj = {};
 	obj.gistid = gist.gistid;

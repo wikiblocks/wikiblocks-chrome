@@ -63,6 +63,7 @@ window.onload = function() {
 					//data may have an error, which must be evaluated
 					data = results;
 					sendResponse(results);
+					// alert listeners (popup) that data is available (cached in the content script).
 					chrome.runtime.sendMessage({method: 'ready'});
 				});
 				//async fulfillment
