@@ -1,10 +1,13 @@
-# Chrome Extension
+wikiblocks-chrome
+=================
 
 Copyright 2015, Brooks Mershon
 
-The extension uses information from a Wikipedia article to produce a list of relevant blocks in the form of Mike Bostock's [many code examples](http://bl.ocks.org).
+The extension uses information from a Wikipedia article to produce a list of relevant GitHub Gists (known as blocks) in the form of Mike Bostock's [many code examples](http://bl.ocks.org).
 
 *This project is in the early stages of development and may improve dramatically without warning.*
+
+Use the extension.crx
 
 Searching:
 
