@@ -7,7 +7,9 @@ The extension uses information from a Wikipedia article to produce a list of rel
 
 *This project is in the early stages of development and may improve dramatically without warning.*
 
-Use the extension.crx
+Drag the the `wikiblocks.crx` into Chrome extensions window that you can access by visiting chrome://extensions or by going to settings in your Chrome browser.
+
+Check out [wikiblocks-search](https://github.com/bmershon/wikiblocks-search) for more information about how the extension gets relevant blocks.
 
 
 ![Rrim's algorithm recording](/images/prim_algorithm_recording.gif)
