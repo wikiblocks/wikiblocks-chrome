@@ -9,6 +9,11 @@ The extension uses information from a Wikipedia article to produce a list of rel
 
 Use the extension.crx
 
+
+![https://en.wikipedia.org/wiki/L-system](/images/prim_algorithm_recording.gif)
+
+
+
 Searching:
 
 ![https://en.wikipedia.org/wiki/L-system](/images/L_system_loading.png)
