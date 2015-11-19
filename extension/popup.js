@@ -2,21 +2,13 @@
 	Copyright 2015, Brooks Mershon
 */
 
-var LoadingAnimation;
-
 var data = null,
 	currentPage = {},
-	activeTab,
-	LoadingAnimation = false;
+	loading,
+	activeTab;
 
 var results = d3.select("#results");
 
-chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
-	// listen for events from content script
-	if(message.method == 'inProgress') {
-		updateLoading(); // start loading animation
-	}
-});
 
 window.onload = function() {
 	chrome.runtime.sendMessage({method:'getPage'}, function(page){
@@ -25,11 +17,11 @@ window.onload = function() {
 
 		chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}, function(tabs){
 			activeTab = tabs[0]; // cache active tab
-
+			updateLoading();
 			// must check for results.error
 			chrome.runtime.sendMessage({method:'getResults'}, function(results){
+				clearInterval(loading);
 				data = results;
-				updateLoading(); // attempt to stop loading animation if in progress
 				updateResults();
 			});
 		});
@@ -40,28 +32,24 @@ function updateHeader() {
 	d3.select("#wb-pageTitle").html(currentPage.title);
 }
 
-// show loading when data is null
-// stop when data is available (even if there is an error)
 function updateLoading() {
-	if(!data) {
-		d3.select("#wb-intro").html("Searching for gists...");
+	d3.select("#wb-intro").html("Searching for blocks");
 
-		var container = d3.select("#loading");
-		// new loading animation which uses number of title, aliases, see also, and categories
-		// to determine the vizualization
-		LoadingAnimation = new Visualization(container, getHooks(currentPage));
-		
-		return;
-	} else {
-		if(LoadingAnimation) {
-			if(data.error) {
-				LoadingAnimation.error();
-				return;
-			}
-			LoadingAnimation.stop();
-			d3.select("#loading").selectAll("*").remove();
-		}
-	}
+	// Adapted from http://bl.ocks.org/mbostock/3f987887d5c2148661ae
+	loading = setInterval(function() {
+		console.log("running");
+		d3.select("#wb-pageTitle")
+			.style("color", d3.hcl(Math.random() * 360, 100, 50))
+		  .transition()
+			.duration(500)
+			.style("color", function() {
+				var that = d3.select(this),
+				fill0 = that.style("color"),
+				fill1 = that.style("color", null).style("color");
+				that.style("color", fill0);
+				return fill1;
+			});
+	}, 500);
 }
 
 function updateResults(){
@@ -85,6 +73,7 @@ function updateResults(){
 		return t - t0;
 	}
 
+	// update results list
 	results.selectAll("div")
 	    .data(data.gists)
 	  .enter().append("div").attr("class", "result")
@@ -115,23 +104,9 @@ function updateResults(){
 		//summary information for a result
 		info.attr("class", "info-list");
 	   	info.append('li').text(function(d) { return d.username }).attr("class", "username");
-	    info.append('li').text(function(d) { return (d.tags) ? JSON.stringify(d.tags) : JSON.stringify(d.categories)})
-	   	info.append('li').text(function(d) { return JSON.stringify(d.docfreqs) })
+	    info.append('li').text(function(d) { return d.tags.join(", ")})
 	   	info.append('li').text(function(d) { return "t = " + elapsed(d.timestamp) + " ms"})
 	  });
-}
-
-function getHooks(page) {
-	var hooks = [];
-	for(property in page) {
-		if(page.hasOwnProperty(property)) {
-			var strings = (Array.isArray(page[property])) ? page[property] : [page[property]];
-			strings.forEach(function(d) {
-				hooks.push({property: property, value: d});
-			});
-		}
-	}
-	return hooks;
 }
 
 // makes use of cached tab in order to associate a gist with the page it came from

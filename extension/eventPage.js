@@ -16,8 +16,8 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 		updatePageAction(sender.tab.id, null, sender.tab);
 		chrome.runtime.sendMessage({method: 'contentReady'});
 		return false;
-	} else if(message.method == 'queryForPage') {
-		query(message.page, sendResponse);
+	} else if(message.method == 'performSearch') {
+		search(message.page, sendResponse);
 		return true;
 	} else if(message.method == 'getPage') {
 		//Relay this message to the active tab for fulfillment; active tab caches page object
@@ -52,8 +52,8 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	} else if (message.method == 'clickedGist') {
 		// TODO
 		return false;
-	} else if (message.method == 'recordGist') {
-		recordGist(message.gist, sendResponse);
+	} else if (message.method == 'foundGist') {
+		discoverGist(message.gist, sendResponse);
 		return true;
 	}
 
@@ -64,7 +64,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	Async call to server endpoint that posts a page object and expects an
 	array of gists as a response.
 */
-function query(page, callback) {
+function search(page, callback) {
 
 	var url = "http://127.0.0.1:3000/search";
 
@@ -84,8 +84,29 @@ function query(page, callback) {
 	});
 }
 
-function recordGist(gist, callback) {
-	var url = "http://127.0.0.1:3000/gist";
+function discoverGist(gist, callback) {
+	var url = "http://127.0.0.1:3000/discover";
+
+	// cross-origin request
+	var request = xhr.json(url)
+	    .header("Content-Type", "application/json");
+	
+	// POST to /gist with JSON page object and get results object
+	request.send("POST", JSON.stringify(gist), function(error, response) {
+		if(error) {
+			var results = {};
+			results.error = {status: error.status, display: errorMessage(error.status)};
+			callback(results);
+			return;
+		}
+		callback(JSON.parse(response));
+	});
+}
+
+
+// TODO
+function updateGist(result, callback) {
+	var url = "http://127.0.0.1:3000/update";
 
 	// cross-origin request
 	var request = xhr.json(url)

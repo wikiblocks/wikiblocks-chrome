@@ -58,12 +58,10 @@ window.onload = function() {
 			if(data) {
 				sendResponse(data);
 			} else {
-				chrome.runtime.sendMessage({method: "inProgress"});
-				chrome.runtime.sendMessage({method: "queryForPage", page: page}, function(results) {
+				chrome.runtime.sendMessage({method: "performSearch", page: page}, function(results) {
 					//data may have an error, which must be evaluated
 					data = results;
 					sendResponse(results);
-					// alert listeners (popup) that data is available (cached in the content script).
 					chrome.runtime.sendMessage({method: 'ready'});
 				});
 				//async fulfillment
