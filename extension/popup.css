@@ -1,6 +1,6 @@
 body {
 	min-width: 489px;
-	min-height: 600px;
+	min-height: 489px;
 	background-color: #fff;
 }
 
@@ -70,6 +70,10 @@ li {
 
 li.username {
 	font-size: 1.4em;
+}
+
+li.tag {
+	font-weight: bold;
 }
 
 li.highlight {

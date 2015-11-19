@@ -9,7 +9,6 @@ var data = null,
 
 var results = d3.select("#results");
 
-
 window.onload = function() {
 	chrome.runtime.sendMessage({method:'getPage'}, function(page){
 		currentPage = page;
@@ -104,8 +103,7 @@ function updateResults(){
 		//summary information for a result
 		info.attr("class", "info-list");
 	   	info.append('li').text(function(d) { return d.username }).attr("class", "username");
-	    info.append('li').text(function(d) { return d.tags.join(", ")})
-	   	info.append('li').text(function(d) { return "t = " + elapsed(d.timestamp) + " ms"})
+	    info.append('li').text(function(d) { return d.tags.join(", ")}).attr("class", "tag");
 	  });
 }
 

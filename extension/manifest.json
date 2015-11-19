@@ -8,13 +8,12 @@
 		{
     	"matches": ["https://en.wikipedia.org/wiki/*"],
       "exclude_matches": ["https://en.wikipedia.org/wiki/Main_Page", "https://en.wikipedia.org/wiki/*:*"],
-      "css": ["content.css"],
-			"js": ["d3.min.js", "content.js"],
+			"js": ["d3.js", "content.js"],
       "run_at": "document_end"
 		},
     {
       "matches": ["http://bl.ocks.org/*/*"],
-      "js": ["d3.full.min.js", "blocks.js"],
+      "js": ["d3.js", "blocks.js"],
       "run_at": "document_end"
     }
 	],
