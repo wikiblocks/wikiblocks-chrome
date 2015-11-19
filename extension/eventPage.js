@@ -28,6 +28,15 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 			}
 		);
 		return true; // async response fulfillment
+	} else if(message.method == 'onBlocks') {
+		//Relay this message to the active tab for fulfillment; active tab caches page object
+		chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
+			function(tabs){
+				var activeTab = tabs[0]; // the active tab when popup requests gists
+				chrome.browserAction.setPopup({"tabId":activeTab.id,"popup":"blocks_popup.html"});
+			}
+		);
+		return false; // async response fulfillment
 	} else if(message.method == 'getResults') { //from popup
 		//Relay this message to the active tab for fulfillment; active tab caches search results
 		chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
@@ -43,6 +52,9 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 	} else if (message.method == 'clickedGist') {
 		// TODO
 		return false;
+	} else if (message.method == 'recordGist') {
+		recordGist(message.gist, sendResponse);
+		return true;
 	}
 
 	return false; // no async response fulfillment
@@ -54,15 +66,11 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 */
 function query(page, callback) {
 
-	var url = "http://wikiblocksalpha.elasticbeanstalk.com/search";
+	var url = "http://127.0.0.1:3000/search";
 
 	// cross-origin request
 	var request = xhr.json(url)
 	    .header("Content-Type", "application/json");
-
-	request.on("progress", function(t) {
-		//TODO
-	})
 	
 	// POST to /search with JSON page object and get results object
 	request.send("POST", JSON.stringify(page), function(error, response) {
@@ -74,7 +82,22 @@ function query(page, callback) {
 		}
 		callback(JSON.parse(response));
 	});
+}
+
+function recordGist(gist, callback) {
+	var url = "http://127.0.0.1:3000/gist";
+
+	// cross-origin request
+	var request = xhr.json(url)
+	    .header("Content-Type", "application/json");
 	
+	// POST to /gist with JSON page object and get results object
+	request.send("POST", JSON.stringify(gist), function(error, response) {
+		if(error) {
+			callback(error);
+		}
+		callback(JSON.parse(response));
+	});
 }
 
 function errorMessage(code) {
@@ -85,10 +108,8 @@ function errorMessage(code) {
 		503: "The server is overloaded.",
 		400: "Something went wrong with the Chrome extension on this article."
 	} 
-
 	return (m[code]) ? m[code] : "Error code with status" + code;
 }
-
 
 // used to send an object containing a gist that was clicked and its corresponding page
 function packageGistPage(gist, page) {
