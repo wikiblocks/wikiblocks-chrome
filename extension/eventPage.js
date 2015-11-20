@@ -2,6 +2,60 @@
 	Copyright 2015, Brooks Mershon
 */
 
+var havePage = function(message, sender, sendResponse) {
+	showPageAction(sender.tab.id, null, sender.tab);
+	return false;
+};
+
+var ready = function(message, sender, sendResponse) {
+	updatePageAction(sender.tab.id, null, sender.tab);
+	return false;
+};
+
+var performSearch = function(message, sender, sendResponse) {
+	search(message.page, sendResponse);
+	return true;
+}
+
+var getPage = function(message, sender, sendResponse) {
+	//Relay this message to the active tab for fulfillment; active tab caches page object
+	chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
+		function(tabs){
+			var activeTab = tabs[0]; // the active tab when popup requests gists
+			chrome.tabs.sendMessage(activeTab.id, {method: 'getPage'}, null, sendResponse);
+		}
+	);
+	return true; // async response fulfillment
+}
+
+var getResults = function(message, sender, sendResponse) {
+	//Relay this message to the active tab for fulfillment; active tab caches search results
+	chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
+		function(tabs){
+			// the active tab when popup sent message
+			var activeTab = tabs[0]; 
+			// the content script in the activeTab will fulfill
+			//the response (asynchronously)	from popup
+			chrome.tabs.sendMessage(activeTab.id, {method: 'getResults'}, null, sendResponse);
+		}
+	);
+	return true;
+}
+
+var foundGist = function(message, sender, sendResponse) {
+	discoverGist(message.gist, sendResponse);
+	return true;
+}
+
+var handlers = {
+	'havePage': havePage,
+	'ready': ready,
+	'getPage': getPage,
+	'getResults': getResults,
+	'performSearch': performSearch,
+	'foundGist': foundGist
+}
+
 /*
 	Listen for messages from content scripts and popup scripts. Route asynchronous requests
 	for data from popup to the content script which has cached the data (i.e. results, page object).
@@ -9,55 +63,11 @@
 	The Content script is able to monitor the state of its progress in collecting data and caching a
 	search result. The page action icon is used as a visual indicator of the content script's status.
  */
-chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
-	if(message.method == 'showPageAction') {
-		showPageAction(sender.tab.id, null, sender.tab);
-	} else if(message.method == 'ready') {
-		updatePageAction(sender.tab.id, null, sender.tab);
-		chrome.runtime.sendMessage({method: 'contentReady'});
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
+	if(handlers.hasOwnProperty(message.method))
+		return handlers[message.method].call(null, message, sender, sendResponse);
+	else
 		return false;
-	} else if(message.method == 'performSearch') {
-		search(message.page, sendResponse);
-		return true;
-	} else if(message.method == 'getPage') {
-		//Relay this message to the active tab for fulfillment; active tab caches page object
-		chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
-			function(tabs){
-				var activeTab = tabs[0]; // the active tab when popup requests gists
-				chrome.tabs.sendMessage(activeTab.id, {method: 'getPage'}, null, sendResponse);
-			}
-		);
-		return true; // async response fulfillment
-	} else if(message.method == 'onBlocks') {
-		//Relay this message to the active tab for fulfillment; active tab caches page object
-		chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
-			function(tabs){
-				var activeTab = tabs[0]; // the active tab when popup requests gists
-				chrome.browserAction.setPopup({"tabId":activeTab.id,"popup":"blocks_popup.html"});
-			}
-		);
-		return false; // async response fulfillment
-	} else if(message.method == 'getResults') { //from popup
-		//Relay this message to the active tab for fulfillment; active tab caches search results
-		chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
-			function(tabs){
-				// the active tab when popup sent message
-				var activeTab = tabs[0]; 
-				// the content script in the activeTab will fulfill
-				//the response (asynchronously)	from popup
-				chrome.tabs.sendMessage(activeTab.id, {method: 'getResults'}, null, sendResponse);
-			}
-		);
-		return true;
-	} else if (message.method == 'clickedGist') {
-		// TODO
-		return false;
-	} else if (message.method == 'foundGist') {
-		discoverGist(message.gist, sendResponse);
-		return true;
-	}
-
-	return false; // no async response fulfillment
 });
 
 /*
@@ -142,7 +152,7 @@ function packageGistPage(gist, page) {
 	return obj;
 }
 
-function showPageAction(tabId, changeInfo,tab) {
+function showPageAction(tabId, changeInfo, tab) {
     chrome.pageAction.show(tabId);
 };
 

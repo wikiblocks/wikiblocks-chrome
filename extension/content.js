@@ -47,8 +47,10 @@ window.onload = function() {
 		page.aliases.push(this.innerText);
 	});	
 
+	console.log(page);
+	
 	if(page.title) {
-		chrome.runtime.sendMessage({method:"showPageAction"});
+		chrome.runtime.sendMessage({method:"havePage"});
 	}
 
 	chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){

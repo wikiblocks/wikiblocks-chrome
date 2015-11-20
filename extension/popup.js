@@ -32,7 +32,7 @@ function updateHeader() {
 }
 
 function updateLoading() {
-	d3.select("#wb-intro").html("Searching for blocks");
+	d3.select("#wb-intro").html("Searching for blocks...");
 
 	// Adapted from http://bl.ocks.org/mbostock/3f987887d5c2148661ae
 	loading = setInterval(function() {
