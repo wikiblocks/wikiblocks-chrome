@@ -1,25 +1,32 @@
 body {
-	min-width: 489px;
-	min-height: 489px;
+	width: 489px;
+	min-height: 600px;
 	background-color: #fff;
 }
 
 a {
 	outline: none;
 	color: #4682B4;
+	text-rendering: optimizeLegibility;
+
 }
 
 #wb-intro {
+	height: 18px;
 	margin-left: 10px;
 	color: #000;
 	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+	text-rendering: optimizeLegibility;
+
 }
 
 #wb-pageTitle {
 	margin-left: 10px;
-	color: #aaa;
+	color: #4f4f4f;
 	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
 	height: ;
+	text-rendering: optimizeLegibility;
+
 }
 
 div .result {
@@ -44,10 +51,6 @@ a.gist {
 	list-style: none;
 }
 
-li{
-    margin-bottom: 10px
-}
-
 a.gist:hover {
 	border-color: #E6550D;
 }
@@ -67,6 +70,8 @@ li {
 	font-size: 1.2em;
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	color: #aaa;
+	text-rendering: optimizeLegibility;
+	margin-bottom: 5px;
 }
 
 li.username {

@@ -7,6 +7,9 @@ var data = null,
 	loading,
 	activeTab;
 
+
+var countFormat = d3.format(",");
+
 var results = d3.select("#results");
 
 window.onload = function() {
@@ -16,10 +19,10 @@ window.onload = function() {
 
 		chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}, function(tabs){
 			activeTab = tabs[0]; // cache active tab
-			updateLoading();
+			loading(true);
 			// must check for results.error
 			chrome.runtime.sendMessage({method:'getResults'}, function(results){
-				clearInterval(loading);
+				loading(false);
 				data = results;
 				updateResults();
 			});
@@ -31,24 +34,49 @@ function updateHeader() {
 	d3.select("#wb-pageTitle").html(currentPage.title);
 }
 
-function updateLoading() {
-	d3.select("#wb-intro").html("Searching for blocks...");
+function on() {
+	d3.select(this)
+	  .transition()
+		.ease("linear")
+		.duration(500)
+		.style("color", d3.hcl(Math.random() * 360, 100, 50))
+		.each("end", off);
+}
 
-	// Adapted from http://bl.ocks.org/mbostock/3f987887d5c2148661ae
-	loading = setInterval(function() {
-		console.log("running");
-		d3.select("#wb-pageTitle")
-			.style("color", d3.hcl(Math.random() * 360, 100, 50))
-		  .transition()
-			.duration(500)
-			.style("color", function() {
-				var that = d3.select(this),
-				fill0 = that.style("color"),
-				fill1 = that.style("color", null).style("color");
-				that.style("color", fill0);
-				return fill1;
-			});
-	}, 500);
+function off() {
+	d3.select(this)
+	  .transition()
+		.duration(500)
+		.style("color", function() {
+			var that = d3.select(this),
+			fill0 = that.style("color"),
+			fill1 = that.style("color", null).style("color");
+			that.style("color", fill0);
+			return fill1;
+		})
+		.each("end", on);
+}
+
+function stop() {
+	d3.select(this)
+	  .transition()
+		.duration(200)
+		.style("color", function() {
+			var that = d3.select(this),
+			fill0 = that.style("color"),
+			fill1 = that.style("color", null).style("color");
+			that.style("color", fill0);
+			return fill1;
+		});
+}
+
+function loading(show) {
+	d3.select("#wb-intro").html((show) ? "Searching for blocks..." : "");
+
+	if(show)
+		d3.select("#wb-pageTitle").each(on);
+	else
+		d3.select("#wb-pageTitle").each(stop);
 }
 
 function updateResults(){
@@ -64,7 +92,7 @@ function updateResults(){
 	} else {
 		var plural = (data.gists.length > 1) ? "s" : "";
 		var duration = data.end - data.start;
-		d3.select("#wb-intro").html("Found " + data.gists.length + " block" + plural + " (" + duration/1000 + " seconds)");
+		d3.select("#wb-intro").html("Found " + countFormat(data.gists.length) + " block" + plural + " (" + duration/1000 + " seconds)");
 	}
 
 	function elapsed(t) {
