@@ -77,7 +77,7 @@
 	*/
 	function search(page, callback) {
 
-		var url = "http://127.0.0.1:3000/search";
+		var url = "http://wikiblocksalpha.elasticbeanstalk.com/search";
 
 		// cross-origin request
 		var request = xhr.json(url)
@@ -96,7 +96,7 @@
 	}
 
 	function discoverGist(gist, callback) {
-		var url = "http://127.0.0.1:3000/discover";
+		var url = "http://wikiblocksalpha.elasticbeanstalk.com/discover";
 
 		// cross-origin request
 		var request = xhr.json(url)
@@ -116,7 +116,8 @@
 
 	// TODO
 	function updateGist(result, callback) {
-		var url = "http://127.0.0.1:3000/update";
+
+		var url = "http://wikiblocksalpha.elasticbeanstalk.com/update";
 
 		// cross-origin request
 		var request = xhr.json(url)

@@ -10,7 +10,7 @@
 	var countFormat = d3.format(",");
 
 	var idfScale = d3.scale.linear()
-					.range([.4, 1]);
+					.range([.8, 1.8]);
 
 	var results = d3.select("#results");
 
@@ -140,7 +140,7 @@
 					.enter()
 						.append('li')
 						.html(function(d, i) { return ((i == 0) ? "" : "&nbsp;") + d.tag})
-						.style("opacity", function(d) { return idfScale(d.idf)});
+						.style("font-size", function(d) { return idfScale(d.idf) + "em"});
 			});
 	}
 

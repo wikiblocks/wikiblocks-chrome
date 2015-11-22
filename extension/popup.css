@@ -65,10 +65,8 @@ a.gist:hover {
 }
 
 li {
-	font-size: 1.2em;
     color: #4f4f4f;
 	display: inline-block;
-	font-weight: bold;
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	text-rendering: optimizeLegibility;
 	margin-bottom: 5px;

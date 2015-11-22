@@ -11,11 +11,13 @@
 
 !function(){
 
-	var gist = buildGist(d3.select("body"));
+	var gist = buildGist(d3.select('body'));
+
+	console.log("Gist object for this page:", gist);
 
 	chrome.runtime.sendMessage({method:"foundGist", gist: gist}, function(result) {
 		indicateSuccess(!result.error && result.success);
-		console.log(result);
+		console.log("result:", result);
 	});
 
 	function buildGist(g) {
@@ -32,9 +34,10 @@
 		//TODO gather links to wikipedia and add these tags to description
 		var tags = [];
 
-		var links = g.selectAll('a')
+		var links = g.select('.gist-readme').selectAll('a')
 						.each(function(d) {
-							var href = this.href;
+							var href = d3.select(this).attr('href');
+							console.log(href);
 							if(href.indexOf('en.wikipedia.org/wiki/') >= 0) {
 								var components = href.split("/");
 								var tokens = decodeURIComponent(components[components.length-1]).split("_");
@@ -42,6 +45,7 @@
 							}
 						});
 
+		console.log(links);
 		gist.tags = tags;
 
 		return gist;
