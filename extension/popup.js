@@ -9,8 +9,11 @@
 
 	var countFormat = d3.format(",");
 
-	var idfScale = d3.scale.linear()
+	var idfSizeScale = d3.scale.linear()
 					.range([.8, 1.8]);
+
+	var idfOpacityScale = d3.scale.linear()
+					.range([0.3, 1]);
 
 	var results = d3.select("#results");
 
@@ -97,7 +100,8 @@
 			var plural = (data.gists.length > 1) ? "s" : "";
 			var duration = data.end - data.start;
 			total = data.gists[0].count;
-			idfScale.domain([0, Math.log(total)]);
+			idfOpacityScale.domain([0, Math.log(total)]);
+			idfSizeScale.domain([0, Math.log(total)]);
 			d3.select("#wb-intro").html("Found " + countFormat(data.gists.length) + " block" + plural + " from a total of " + countFormat(total) + " others "+ "(" + duration/1000 + " seconds)");
 		}
 
@@ -120,7 +124,10 @@
 					.classed("mdl-shadow--2dp", true)
 					.attr("target", "_blank")
 					.style("background-image", function(d) { return "url(http://bl.ocks.org/" + d.username + "/raw/" + d.gistid + "/thumbnail.png)"})
-					.html(function(d) { return "<span class=description>" + d.description + "</span>"})
+					.html(function(d) {
+						return "<span class=description>" + d.description + "</span>" +
+								"<span class=username>" + d.username + "</span>"
+					})
 					.on("mouseenter", function(d, i) {
 						d3.select(this).classed("mdl-shadow--6dp", true);
 					})
@@ -131,8 +138,6 @@
 					.on("click", clickResult);
 
 				var info = parent.append('span');
-				info.append('p').text(function(d) { return d.username })
-					.attr("class", "username");
 
 				var tagList = info.append('ul').attr("class", "tag-list")
 								  
@@ -140,7 +145,8 @@
 					.enter()
 						.append('li')
 						.html(function(d, i) { return ((i == 0) ? "" : "&nbsp;") + d.tag})
-						.style("font-size", function(d) { return idfScale(d.idf) + "em"});
+						.style("font-size", function(d) { return idfSizeScale(d.idf) + "em"})
+						.style("opacity", function(d) { return idfOpacityScale(d.idf)});
 			});
 	}
 

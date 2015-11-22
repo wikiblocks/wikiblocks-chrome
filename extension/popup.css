@@ -47,6 +47,7 @@ a.gist {
 
 ul.tag-list {
 	list-style: none;
+	padding: 12px;
 }
 
 a.gist:hover {
@@ -56,7 +57,22 @@ a.gist:hover {
 .description {
 	pointer-events: none;
 	position: absolute;
-    padding: 12px;
+    top: 12px;
+    left: 12px;
+    z-index: 4;
+    color: #4f4f4f;
+	font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+   	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
+}
+
+.username {
+	font-style: italic;
+	pointer-events: none;
+	position: absolute;
+	bottom: 12px;
+	text-anchor: end;
+	right: 12px;
     z-index: 4;
     color: #4f4f4f;
 	font-size: 14px;
@@ -70,9 +86,4 @@ li {
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	text-rendering: optimizeLegibility;
 	margin-bottom: 5px;
-}
-
-.username {
-	color: #4f4f4f;
-	font-size: 1.4em;
 }
