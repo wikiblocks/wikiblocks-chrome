@@ -1,7 +1,9 @@
+/* Import ET Book styles
+   adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css */
 body {
 	width: 489px;
 	min-height: 600px;
-	background-color: #fff;
+	background-color: #fffff8;
 }
 
 a {
@@ -14,7 +16,7 @@ a {
 	height: 18px;
 	margin-left: 10px;
 	color: #4f4f4f;
-	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 	text-rendering: optimizeLegibility;
 
 }
@@ -22,7 +24,7 @@ a {
 #wb-pageTitle {
 	margin-left: 10px;
 	color: #4f4f4f;
-	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 	height: ;
 	text-rendering: optimizeLegibility;
 
@@ -62,7 +64,7 @@ a.gist:hover {
     z-index: 4;
     color: #4f4f4f;
 	font-size: 14px;
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
    	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
 }
 
@@ -76,7 +78,7 @@ a.gist:hover {
     z-index: 4;
     color: #4f4f4f;
 	font-size: 14px;
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
    	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
 }
 
