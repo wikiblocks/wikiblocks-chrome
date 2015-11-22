@@ -8,13 +8,12 @@ a {
 	outline: none;
 	color: #4682B4;
 	text-rendering: optimizeLegibility;
-
 }
 
 #wb-intro {
 	height: 18px;
 	margin-left: 10px;
-	color: #000;
+	color: #4f4f4f;
 	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
 	text-rendering: optimizeLegibility;
 
@@ -29,7 +28,7 @@ a {
 
 }
 
-div .result {
+div.result {
 	display: block;
 	height: 120px;
 }
@@ -46,8 +45,7 @@ a.gist {
     position: relative;
 }
 
-.info-list {
-	padding: 12px;
+ul.tag-list {
 	list-style: none;
 }
 
@@ -55,12 +53,12 @@ a.gist:hover {
 	border-color: #E6550D;
 }
 
-a.gist .description {
+.description {
 	pointer-events: none;
 	position: absolute;
     padding: 12px;
     z-index: 4;
-    color: #000;
+    color: #4f4f4f;
 	font-size: 14px;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
    	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
@@ -68,20 +66,15 @@ a.gist .description {
 
 li {
 	font-size: 1.2em;
+    color: #4f4f4f;
+	display: inline-block;
+	font-weight: bold;
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
-	color: #aaa;
 	text-rendering: optimizeLegibility;
 	margin-bottom: 5px;
 }
 
-li.username {
+.username {
+	color: #4f4f4f;
 	font-size: 1.4em;
-}
-
-li.tag {
-	font-weight: bold;
-}
-
-li.highlight {
-	color: #000;
 }
