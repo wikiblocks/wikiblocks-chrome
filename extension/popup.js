@@ -91,14 +91,14 @@
 		}
 
 		if(data.gists.length == 0) {
-			d3.select("#wb-intro").html("Could not find any <b>bl.ocks</b>. " + 
+			d3.select("#wb-intro").html("Could not find any related <b>bl.ocks</b>. " + 
 						"Woud you <a href=\"http://bost.ocks.org/mike/block/\" target=\"_blank\">like to make one</a>?");
 		} else {
 			var plural = (data.gists.length > 1) ? "s" : "";
 			var duration = data.end - data.start;
 			total = data.gists[0].count;
 			idfScale.domain([0, Math.log(total)]);
-			d3.select("#wb-intro").html("Found " + countFormat(data.gists.length) + " block" + plural + " (" + duration/1000 + " seconds)");
+			d3.select("#wb-intro").html("Found " + countFormat(data.gists.length) + " block" + plural + " from a total of " + countFormat(total) + " others "+ "(" + duration/1000 + " seconds)");
 		}
 
 		function elapsed(t) {
