@@ -10,7 +10,7 @@
 	var countFormat = d3.format(",");
 
 	var idfSizeScale = d3.scale.linear()
-					.range([.8, 1.8]);
+					.range([.8, 2.2]);
 
 	var idfOpacityScale = d3.scale.linear()
 					.range([0.3, 1]);
@@ -102,7 +102,7 @@
 			total = data.gists[0].count;
 			idfOpacityScale.domain([0, Math.log(total)]);
 			idfSizeScale.domain([0, Math.log(total)]);
-			d3.select("#wb-intro").html("Found " + countFormat(data.gists.length) + " block" + plural + " from a total of " + countFormat(total) + " others "+ "(" + duration/1000 + " seconds)");
+			d3.select("#wb-intro").html("Found " + countFormat(data.gists.length) + " block" + plural + " (" + duration/1000 + " seconds)");
 		}
 
 		function elapsed(t) {

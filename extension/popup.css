@@ -1,29 +1,34 @@
-/* Import ET Book styles
-   adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css */
+/* Tufte CSS */
+
+p { font-size: 1.1rem; }
+
+p { line-height: 2rem;
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+    padding-right: 0;
+    vertical-align: baseline; }
+
 body {
 	width: 489px;
 	min-height: 600px;
-	background-color: #fffff8;
+	background-color: #fcfcfc;
 }
 
 a {
 	outline: none;
-	color: #4682B4;
 	text-rendering: optimizeLegibility;
 }
 
 #wb-intro {
-	height: 18px;
 	margin-left: 10px;
-	color: #4f4f4f;
+	color: #000;
 	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 	text-rendering: optimizeLegibility;
-
 }
 
 #wb-pageTitle {
 	margin-left: 10px;
-	color: #4f4f4f;
+	color: #000;
 	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 	height: ;
 	text-rendering: optimizeLegibility;
@@ -62,9 +67,9 @@ a.gist:hover {
     top: 12px;
     left: 12px;
     z-index: 4;
-    color: #4f4f4f;
+    color: #000;
 	font-size: 14px;
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
    	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
 }
 
@@ -76,16 +81,16 @@ a.gist:hover {
 	text-anchor: end;
 	right: 12px;
     z-index: 4;
-    color: #4f4f4f;
+    color: #000;
 	font-size: 14px;
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
    	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
 }
 
 li {
-    color: #4f4f4f;
+    color: #000;
 	display: inline-block;
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 	text-rendering: optimizeLegibility;
 	margin-bottom: 5px;
 }
