@@ -4,15 +4,16 @@
 
 window.onload = function() {
 
-	var page = {title: "", aliases: [], see_also: [], categories: []};
-
-	var data = null;
+	var page = {},
+		data = null;
 
 	var title = d3.select("#firstHeading");
 	
 	page.title = title.text() || page.title;
 
-	var seeAlsoChild= d3.select("#See_also").node();
+	var seeAlsoArr = [];
+
+	var seeAlsoChild = d3.select("#See_also").node();
 
 	if(seeAlsoChild) {
 		var seeAlsoNode = seeAlsoChild.parentNode; // <h2></h2>
@@ -26,8 +27,9 @@ window.onload = function() {
 		if(seeAlsoList) {
 			var seeAlsoLinks = d3.select(seeAlsoList).selectAll("a");
 
+			seeAlsoArr = [];
 			seeAlsoLinks.each(function(d) {
-				page.see_also.push(this.text);
+				seeAlsoArr.push(this.text);
 			});
 
 			seeAlsoLinks = d3.select(seeAlsoList).selectAll("a");
@@ -36,19 +38,23 @@ window.onload = function() {
 
 	var categoryLinks = d3.select("#mw-normal-catlinks").select("ul").selectAll("a");
 
+	categoriesArr = [];
 	categoryLinks.each(function(d) {
-		page.categories.push(this.text);
+		categoriesArr.push(this.text);
 	});	
 
 	var aliases = d3.select("p").selectAll("b");
 
+	aliasesArr = [];
 	aliases.each(function(d) {
 		// innerText because the node is a <b> tag
-		page.aliases.push(this.innerText);
+		aliasesArr.push(this.innerText);
 	});	
 
-	console.log(page);
-	
+	if(aliasesArr.length) page.aliases = aliasesArr;
+	if(seeAlsoArr.length) page.see_also = seeAlsoArr;
+	if(categoriesArr.length) page.categories = categoriesArr;
+		
 	if(page.title) {
 		chrome.runtime.sendMessage({method:"havePage"});
 	}
