@@ -1,13 +1,5 @@
 /* Tufte CSS */
 
-p { font-size: 1.1rem; }
-
-p { line-height: 2rem;
-    margin-top: 1.4rem;
-    margin-bottom: 1.4rem;
-    padding-right: 0;
-    vertical-align: baseline; }
-
 body {
 	width: 489px;
 	min-height: 600px;
@@ -16,10 +8,12 @@ body {
 
 a {
 	outline: none;
+	color: #000;
 	text-rendering: optimizeLegibility;
 }
 
 #wb-intro {
+	font-size: 1.2em;
 	margin-left: 10px;
 	color: #000;
 	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
