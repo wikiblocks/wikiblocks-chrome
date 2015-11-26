@@ -3,7 +3,7 @@
 body {
 	width: 489px;
 	min-height: 600px;
-	background-color: #fcfcfc;
+	background-color: #FCFCFA;
 }
 
 a {
@@ -65,6 +65,19 @@ a.gist:hover {
 	font-size: 14px;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
    	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
+}
+
+.rank {
+	pointer-events: none;
+	position: absolute;
+    bottom: 12px;
+    left: 12px;
+    z-index: 4;
+    color: #000;
+	font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+   	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
+   	font-weight: bold;
 }
 
 .username {

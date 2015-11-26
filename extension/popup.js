@@ -126,7 +126,8 @@
 					.style("background-image", function(d) { return "url(http://bl.ocks.org/" + d.username + "/raw/" + d.gistid + "/thumbnail.png)"})
 					.html(function(d) {
 						return "<span class=description>" + d.description + "</span>" +
-								"<span class=username>" + d.username + "</span>"
+								"<span class=username>" + d.username + "</span>" +
+								"<span class=rank>" + d.rank.toFixed(3) + "</span>"
 					})
 					.on("mouseenter", function(d, i) {
 						d3.select(this).classed("mdl-shadow--6dp", true);
