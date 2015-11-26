@@ -26,7 +26,6 @@ a {
 	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 	height: ;
 	text-rendering: optimizeLegibility;
-
 }
 
 div.result {
@@ -97,7 +96,7 @@ a.gist:hover {
 li {
     color: #000;
 	display: inline-block;
-	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
 	text-rendering: optimizeLegibility;
 	margin-bottom: 5px;
 }

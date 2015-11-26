@@ -127,7 +127,7 @@
 					.html(function(d) {
 						return "<span class=description>" + d.description + "</span>" +
 								"<span class=username>" + d.username + "</span>" +
-								"<span class=rank>" + d.rank.toFixed(3) + "</span>"
+								"<span class=rank>" + d.score.toFixed(3) + "</span>"
 					})
 					.on("mouseenter", function(d, i) {
 						d3.select(this).classed("mdl-shadow--6dp", true);
