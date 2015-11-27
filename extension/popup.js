@@ -149,6 +149,9 @@
 						.style("font-size", function(d) { return idfSizeScale(d.idf) + "em"})
 						.style("opacity", function(d) { return idfOpacityScale(d.idf)});
 			});
+
+			d3.select(".next").style("visibility", "visible");
+
 	}
 
 	// makes use of cached tab in order to associate a gist with the page it came from

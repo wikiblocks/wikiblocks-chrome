@@ -3,7 +3,11 @@
 body {
 	width: 489px;
 	min-height: 600px;
-	background-color: #FCFCFA;
+	background-color: #fff;
+}
+
+footer {
+	height: 100px;
 }
 
 a {
@@ -31,6 +35,7 @@ a {
 div.result {
 	display: block;
 	height: 120px;
+	width: 100%;
 }
 
 a.gist {
@@ -99,4 +104,19 @@ li {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
 	text-rendering: optimizeLegibility;
 	margin-bottom: 5px;
+}
+
+.next {
+	font-family: font-family: "Helvetica Neue", Helvetica, sans-serif;
+	left: 20px;
+	font-size: 22px;
+	margin-left: auto;
+	margin-right: auto;
+	visibility: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.next span {
+	text-decoration: underline;
 }
