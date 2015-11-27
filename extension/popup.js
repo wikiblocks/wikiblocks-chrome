@@ -10,9 +10,9 @@
 	var countFormat = d3.format(",");
 
 	var idfSizeScale = d3.scale.linear()
-					.range([.8, 2.2]);
+					.range([.8, 1.8]);
 
-	var idfOpacityScale = d3.scale.linear()
+	var opacityScale = d3.scale.linear()
 					.range([0.3, 1]);
 
 	var results = d3.select("#results");
@@ -86,7 +86,8 @@
 
 	function updateResults(){
 
-		var total;
+		var total,
+			maxScore;
 
 		if(data.error) {
 			d3.select("#wb-intro").html(data.error.display);
@@ -100,9 +101,14 @@
 			var plural = (data.gists.length > 1) ? "s" : "";
 			var duration = data.end - data.start;
 			total = data.gists[0].count;
-			idfOpacityScale.domain([0, Math.log(total)]);
+			maxScore = d3.max(data.gists, function(d) {return d.score});
+			console.log(maxScore)
+			opacityScale.domain([0, maxScore]);
 			idfSizeScale.domain([0, Math.log(total)]);
 			d3.select("#wb-intro").html("Found " + countFormat(data.gists.length) + " block" + plural + " (" + duration/1000 + " seconds)");
+			if(data.gists.length >= 10)
+				d3.select(".next").style("visibility", "visible");
+
 		}
 
 		function elapsed(t) {
@@ -115,8 +121,14 @@
 		    .data(data.gists)
 		  .enter().append("div")
 		  	.attr("class", "result")
-		    .attr("id", function(d) { return d.gistid; })
+		    .attr("id", function(d, i) { return d.gistid; })
 			.call(function(parent){
+
+				var rank = parent.append('span')
+								   .attr("class", "rank");
+
+				rank.html(function(d, i) {return (i + 1)});
+
 				var result = parent.append('span');
 				result.append('a')
 					.attr("href", function(d) { return "http://bl.ocks.org/" + d.username + "/" + d.gistid})
@@ -127,7 +139,7 @@
 					.html(function(d) {
 						return "<span class=description>" + d.description + "</span>" +
 								"<span class=username>" + d.username + "</span>" +
-								"<span class=rank>" + d.score.toFixed(3) + "</span>"
+								"<span class=score>" + d.score.toFixed(3) + "</span>"
 					})
 					.on("mouseenter", function(d, i) {
 						d3.select(this).classed("mdl-shadow--6dp", true);
@@ -147,11 +159,8 @@
 						.append('li')
 						.html(function(d, i) { return ((i == 0) ? "" : "&nbsp;") + d.tag})
 						.style("font-size", function(d) { return idfSizeScale(d.idf) + "em"})
-						.style("opacity", function(d) { return idfOpacityScale(d.idf)});
+						.style("opacity", function(d) { return opacityScale(d.score)});
 			});
-
-			d3.select(".next").style("visibility", "visible");
-
 	}
 
 	// makes use of cached tab in order to associate a gist with the page it came from

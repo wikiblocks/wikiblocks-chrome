@@ -10,6 +10,14 @@ footer {
 	height: 100px;
 }
 
+#about {
+	color: #4f4f4f;
+	text-anchor: right;
+	position: absolute;
+	top: 12px;
+	right: 12px;
+}
+
 a {
 	outline: none;
 	color: #000;
@@ -19,16 +27,15 @@ a {
 #wb-intro {
 	font-size: 1.2em;
 	margin-left: 10px;
-	color: #000;
-	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+	color: #4f4f4f;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
 	text-rendering: optimizeLegibility;
 }
 
 #wb-pageTitle {
 	margin-left: 10px;
-	color: #000;
-	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-	height: ;
+	color: #4f4f4f;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
 	text-rendering: optimizeLegibility;
 }
 
@@ -38,7 +45,18 @@ div.result {
 	width: 100%;
 }
 
+span.rank {
+	width: 25px;
+	font-size: 1.4em;
+	color: #c6c6c6;
+	float: left;
+	left: 10px;
+	text-align: right;
+	margin-top: 50px;
+}
+
 a.gist {
+	margin-left: 20px;
 	border:none;
 	background-position: 0% 50%;
 	height: 110px;
@@ -71,7 +89,7 @@ a.gist:hover {
    	text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
 }
 
-.rank {
+.score {
 	pointer-events: none;
 	position: absolute;
     bottom: 12px;
@@ -99,7 +117,7 @@ a.gist:hover {
 }
 
 li {
-    color: #000;
+    color: #4f4f4f;
 	display: inline-block;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
 	text-rendering: optimizeLegibility;
