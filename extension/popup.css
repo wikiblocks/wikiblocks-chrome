@@ -46,13 +46,15 @@ div.result {
 }
 
 span.rank {
+	font-family: font-family: "Helvetica Neue", Helvetica, sans-serif;
 	width: 25px;
 	font-size: 1.4em;
-	color: #c6c6c6;
+	color: #c9c9c9;
 	float: left;
 	left: 10px;
 	text-align: right;
-	margin-top: 50px;
+	margin-top: 55px;
+	vertical-align: middle;
 }
 
 a.gist {
