@@ -9,11 +9,8 @@
 
 	var countFormat = d3.format(",");
 
-	var idfSizeScale = d3.scale.linear()
-					.range([.8, 1.8]);
-
-	var opacityScale = d3.scale.linear()
-					.range([0.3, 1]);
+	var idfSizeScale = d3.scale.pow().exponent(2)
+					.range([1, 1.8]);
 
 	var results = d3.select("#results");
 
@@ -100,15 +97,14 @@
 		} else {
 			var plural = (data.gists.length > 1) ? "s" : "";
 			var duration = data.end - data.start;
+			
 			total = data.gists[0].count;
-			maxScore = d3.max(data.gists, function(d) {return d.score});
-			console.log(maxScore)
-			opacityScale.domain([0, maxScore]);
 			idfSizeScale.domain([0, Math.log(total)]);
+
 			d3.select("#wb-intro").html("Found " + countFormat(data.gists.length) + " block" + plural + " (" + duration/1000 + " seconds)");
+			
 			if(data.gists.length >= 10)
 				d3.select(".next").style("visibility", "visible");
-
 		}
 
 		function elapsed(t) {
@@ -159,7 +155,6 @@
 						.append('li')
 						.html(function(d, i) { return ((i == 0) ? "" : "&nbsp;") + d.tag})
 						.style("font-size", function(d) { return idfSizeScale(d.idf) + "em"})
-						.style("opacity", function(d) { return opacityScale(d.score)});
 			});
 	}
 
