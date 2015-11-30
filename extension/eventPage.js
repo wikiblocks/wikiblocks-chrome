@@ -48,13 +48,26 @@
 		return true;
 	}
 
+	var clickedGist = function(message, sender, sendResponse) {
+		chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
+			function(tabs){
+				var activeTab = message.tab;
+				chrome.tabs.sendMessage(activeTab.id, {method: 'getPage'}, null, function(page) {
+					updateGist({gist: message.gist, page: page}, sendResponse);
+				});
+			}
+		);
+		return false;
+	}
+
 	var handlers = {
 		'havePage': havePage,
 		'ready': ready,
 		'getPage': getPage,
 		'getResults': getResults,
 		'performSearch': performSearch,
-		'foundGist': foundGist
+		'foundGist': foundGist,
+		'clickedGist': clickedGist
 	}
 
 	/*
@@ -117,14 +130,14 @@
 	// TODO
 	function updateGist(result, callback) {
 
-		var url = "http://wikiblocksalpha.elasticbeanstalk.com/update";
+		var url = "http://127.0.0.1:3000/update";
 
 		// cross-origin request
 		var request = xhr.json(url)
 		    .header("Content-Type", "application/json");
 		
 		// POST to /gist with JSON page object and get results object
-		request.send("POST", JSON.stringify(gist), function(error, response) {
+		request.send("POST", JSON.stringify(result), function(error, response) {
 			if(error) {
 				callback(error);
 			}

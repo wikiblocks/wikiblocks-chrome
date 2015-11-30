@@ -9,8 +9,7 @@
 
 	var countFormat = d3.format(",");
 
-	var idfSizeScale = d3.scale.pow().exponent(2)
-					.range([1, 1.8]);
+	var idfSizeScale = d3.scale.pow().exponent(2).range([1, 1.8]);
 
 	var results = d3.select("#results");
 
@@ -34,42 +33,6 @@
 
 	function updateHeader() {
 		d3.select("#wb-pageTitle").html(currentPage.title);
-	}
-
-	function on() {
-		d3.select(this)
-		  .transition()
-			.ease("linear")
-			.duration(500)
-			.style("color", d3.hcl(Math.random() * 360, 100, 50))
-			.each("end", off);
-	}
-
-	function off() {
-		d3.select(this)
-		  .transition()
-			.duration(500)
-			.style("color", function() {
-				var that = d3.select(this),
-				fill0 = that.style("color"),
-				fill1 = that.style("color", null).style("color");
-				that.style("color", fill0);
-				return fill1;
-			})
-			.each("end", on);
-	}
-
-	function stop() {
-		d3.select(this)
-		  .transition()
-			.duration(200)
-			.style("color", function() {
-				var that = d3.select(this),
-				fill0 = that.style("color"),
-				fill1 = that.style("color", null).style("color");
-				that.style("color", fill0);
-				return fill1;
-			});
 	}
 
 	function loading(show) {
@@ -155,6 +118,42 @@
 						.append('li')
 						.html(function(d, i) { return ((i == 0) ? "" : "&nbsp;") + d.tag})
 						.style("font-size", function(d) { return idfSizeScale(d.idf) + "em"})
+			});
+	}
+
+	function on() {
+		d3.select(this)
+		  .transition()
+			.ease("linear")
+			.duration(500)
+			.style("color", d3.hcl(Math.random() * 360, 100, 50))
+			.each("end", off);
+	}
+
+	function off() {
+		d3.select(this)
+		  .transition()
+			.duration(500)
+			.style("color", function() {
+				var that = d3.select(this),
+				fill0 = that.style("color"),
+				fill1 = that.style("color", null).style("color");
+				that.style("color", fill0);
+				return fill1;
+			})
+			.each("end", on);
+	}
+
+	function stop() {
+		d3.select(this)
+		  .transition()
+			.duration(200)
+			.style("color", function() {
+				var that = d3.select(this),
+				fill0 = that.style("color"),
+				fill1 = that.style("color", null).style("color");
+				that.style("color", fill0);
+				return fill1;
 			});
 	}
 
