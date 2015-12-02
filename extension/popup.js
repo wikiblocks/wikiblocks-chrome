@@ -9,7 +9,7 @@
 
 	var countFormat = d3.format(",");
 
-	var idfSizeScale = d3.scale.pow().exponent(2).range([1, 1.8]);
+	var idfSizeScale = d3.scale.pow().exponent(2).range([1, 1.4]);
 
 	var results = d3.select("#results");
 
@@ -113,11 +113,12 @@
 
 				var tagList = info.append('ul').attr("class", "tag-list")
 								  
-				tagList.selectAll('li').data(function(d) { return d.tags})
+				tagList.selectAll('li').data(function(d) { return d.matches})
 					.enter()
 						.append('li')
-						.html(function(d, i) { return ((i == 0) ? "" : "&nbsp;") + d.tag})
+						.html(function(d, i) { return ((i == 0) ? "" : "&nbsp;") + d.value})
 						.style("font-size", function(d) { return idfSizeScale(d.idf) + "em"})
+						.classed("category", function(d) {return d.type == "category"});
 			});
 	}
 

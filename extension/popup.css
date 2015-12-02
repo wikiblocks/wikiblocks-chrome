@@ -126,6 +126,10 @@ li {
 	margin-bottom: 5px;
 }
 
+li.category {
+	text-decoration: underline;
+}
+
 .next {
 	font-family: font-family: "Helvetica Neue", Helvetica, sans-serif;
 	left: 20px;
