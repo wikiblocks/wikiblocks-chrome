@@ -13,8 +13,6 @@
 
 	var gist = buildGist(d3.select('body'));
 
-	console.log("Gist object for this page:", gist);
-
 	chrome.runtime.sendMessage({method:"foundGist", gist: gist}, function(result) {
 		indicateSuccess(!result.error && result.success);
 		console.log("result:", result);
@@ -44,8 +42,6 @@
 								tokens.forEach(function(t) {tags.push(t.toLowerCase())});
 							}
 						});
-
-		console.log(links);
 		gist.tags = tags;
 
 		return gist;

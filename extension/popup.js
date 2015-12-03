@@ -111,7 +111,7 @@
 
 				var info = parent.append('span');
 
-				var tagList = info.append('ul').attr("class", "tag-list")
+				var tagList = info.append('ul').attr("class", "tag-list");
 								  
 				tagList.selectAll('li').data(function(d) { return d.matches})
 					.enter()
