@@ -3,6 +3,9 @@
 */
 
 !function(){
+
+	var base = "http://wikiblocksalpha.elasticbeanstalk.com";
+
 	var havePage = function(message, sender, sendResponse) {
 		showPageAction(sender.tab.id, null, sender.tab);
 		return false;
@@ -90,7 +93,7 @@
 	*/
 	function search(page, callback) {
 
-		var url = "http://127.0.0.1:3000/search";
+		var url = base + "/search";
 
 		// cross-origin request
 		var request = xhr.json(url)
@@ -109,7 +112,7 @@
 	}
 
 	function discoverGist(gist, callback) {
-		var url = "http://127.0.0.1:3000/discover";
+		var url = base + "/discover";
 
 		// cross-origin request
 		var request = xhr.json(url)
@@ -130,7 +133,7 @@
 	// TODO
 	function updateGist(result, callback) {
 
-		var url = "http://127.0.0.1:3000/update";
+		var url = base + "/update";
 
 		// cross-origin request
 		var request = xhr.json(url)
