@@ -3,45 +3,23 @@ wikiblocks-chrome
 
 Copyright 2015, Brooks Mershon
 
-The extension uses information from a Wikipedia article to produce a list of relevant GitHub Gists (known as blocks) in the form of Mike Bostock's [many code examples](http://bl.ocks.org).
+*This is a prototype Chrome extension under active development.*
 
-*Note: The packed extension currently points at localhost:3000. The extension will be updated when the current search code is deployed again.*
+The extension uses information from a **Wikipedia** article to produce a list of relevant GitHub Gists (known as blocks) in the form of Mike Bostock's [many code examples](http://bl.ocks.org).
 
-Check out [wikiblocks-search](https://github.com/bmershon/wikiblocks-search) for more information about how the extension gets relevant blocks.
+In addition, the extension adds blocks viewed on **bl.ocks.org** to a database of gists based on information contained in the description, *README.md*, meta tags in *index.html*.
 
+Check out [wikiblocks-search](https://github.com/bmershon/wikiblocks-search) for more information about the server side of the code.
 
-# Update
+# Quickstart
 
-- Hooks in the article (e.g. "Problem of Apollonius" and "geometry") produce SQL queries that are executed in parallel; results load much quicker than before.
-- CSS changes, such as a pulsing page title that makes color transitions during the short loading periods. The old "orbits" animation has been removed. It is time.
-- Content scripts for en.wikipedia.org (searching for gists) and bl.ocks.org (recording/updating gists). 
+To install the extension, download the *extension.crx* file and drag it into an open *chrome://extensions* window.
 
-![https://en.wikipedia.org/wiki/peano_curve](/images/peano-curve.png)
+Navigate to a [wikipedia page](https://en.wikipedia.org/wiki/Adjacency_matrix) and click on the page action icon.
 
-# Prototypes
+![Wikiblocks Chrome Extension](/images/wikipedia.png)
 
-Here are some older protypes, including a fancy loading animation which is dynamically created based on the number and types of hooks to search for on the Wikipedia page.
+Visit blocks on bl.ocks.org to record new blocks!
 
-![Rrim's algorithm recording](/images/prim_algorithm_recording.gif)
-
-![Map projections recording](/images/map_projections_recording.gif)
-
-
-Searching:
-
-![https://en.wikipedia.org/wiki/L-system](/images/L_system_loading.png)
-
-Returned results:
-
-![https://en.wikipedia.org/wiki/L-system](/images/L_system.png)
-
-Results might be relevant to the title as well as the categories of an article:
-
-Search for https://en.wikipedia.org/wiki/Merge_sort
-![https://en.wikipedia.org/wiki/Merge_sort](/images/merge_sort.png)
-
-Relvant examples based on categories:
-
-Search for https://en.wikipedia.org/wiki/Simplicial_complex
-![https://en.wikipedia.org/wiki/Simplicial_complex](/images/simplicial_complex.png)
+![Discover new blocks](/images/blocks.png)
 

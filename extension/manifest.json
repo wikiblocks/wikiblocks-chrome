@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "wiki.bl.ocks",
-  "description": "This extension helps you find bl.ocks that are related to a Wikipedia page.",
+  "description": "This extension helps you find blocks that are related to a Wikipedia page.",
   "version": "1.0",
 	"content_scripts": [
 		{
@@ -31,7 +31,7 @@
   },
   "permissions": [
     "activeTab",
-    "<all_urls>"
+    "http://wikiblocksalpha.elasticbeanstalk.com/*"
   ],
   "icons": {
             "19": "images/icon19_orange.png",
