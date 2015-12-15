@@ -7,7 +7,7 @@ Copyright 2015, Brooks Mershon
 
 The extension uses information from a **Wikipedia** article to produce a list of relevant GitHub Gists (known as blocks) in the form of Mike Bostock's [many code examples](http://bl.ocks.org).
 
-In addition, the extension adds blocks viewed on **bl.ocks.org** to a database of gists based on information contained in the description, *README.md*, meta tags in *index.html*.
+In addition, the extension adds blocks viewed on **bl.ocks.org** to a database of gists based on information contained in the description, *README.md*, and meta tags in *index.html*.
 
 Check out [wikiblocks-search](https://github.com/bmershon/wikiblocks-search) for more information about the server side of the code.
 
