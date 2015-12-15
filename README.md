@@ -15,11 +15,11 @@ Check out [wikiblocks-search](https://github.com/bmershon/wikiblocks-search) for
 
 To install the extension, download the *extension.crx* file and drag it into an open *chrome://extensions* window.
 
-Navigate to a [wikipedia page](https://en.wikipedia.org/wiki/Adjacency_matrix) and click on the page action icon.
+*Navigate to a [Wikipedia page](https://en.wikipedia.org/wiki/Adjacency_matrix) and click on the page action icon.*
 
 ![Wikiblocks Chrome Extension](/images/wikipedia.png)
 
-Visit blocks on bl.ocks.org to record new blocks!
+*Visit blocks on bl.ocks.org to record new blocks!*
 
 ![Discover new blocks](/images/blocks.png)
 
