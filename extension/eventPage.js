@@ -87,10 +87,10 @@
 			return false;
 	});
 
-	/*
-		Async call to server endpoint that posts a page object and expects an
-		array of gists as a response.
-	*/
+	/**
+     * Asynchronous call to server endpoint that posts a page object and expects an
+	 * aa result object with a property gists, which is an array of results.
+	 */
 	function search(page, callback) {
 
 		var url = base + "/search";
@@ -111,6 +111,7 @@
 		});
 	}
 
+	// new gists from bl.ocks.org
 	function discoverGist(gist, callback) {
 		var url = base + "/discover";
 
@@ -118,7 +119,7 @@
 		var request = xhr.json(url)
 		    .header("Content-Type", "application/json");
 		
-		// POST to /gist with JSON page object and get results object
+		// POST to /discover with JSON page object and get results object
 		request.send("POST", JSON.stringify(gist), function(error, response) {
 			if(error) {
 				var results = {};
@@ -130,7 +131,7 @@
 		});
 	}
 
-	// TODO
+	// update a gist based on search result interactions 
 	function updateGist(result, callback) {
 
 		var url = base + "/update";
@@ -139,7 +140,7 @@
 		var request = xhr.json(url)
 		    .header("Content-Type", "application/json");
 		
-		// POST to /gist with JSON page object and get results object
+		// POST to /update with JSON page object and get results object
 		request.send("POST", JSON.stringify(result), function(error, response) {
 			if(error) {
 				callback(error);

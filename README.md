@@ -21,7 +21,6 @@ To install the extension, download the *[extension.crx](https://github.com/bmers
 
 ![Wikiblocks Chrome Extension](/images/lab-color.gif)
 
-
 *Visit blocks on bl.ocks.org to record new blocks!*
 
 ![Discover new blocks](/images/blocks.png)
