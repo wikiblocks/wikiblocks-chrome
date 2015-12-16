@@ -13,7 +13,7 @@ Check out [wikiblocks-search](https://github.com/bmershon/wikiblocks-search) for
 
 # Quickstart
 
-To install the extension, download the *extension.crx* file and drag it into an open *chrome://extensions* window.
+To install the extension, download the *[extension.crx](https://github.com/bmershon/wikiblocks-chrome/raw/master/extension.crx)* file and drag it into an open *chrome://extensions* window (navigate in the Chrome menu to Settings -> Extensions).
 
 *Navigate to a [Wikipedia page](https://en.wikipedia.org/wiki/Adjacency_matrix) and click on the page action icon.*
 
