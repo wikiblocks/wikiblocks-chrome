@@ -4,7 +4,9 @@
 
 !function(){
 
-	var base = "http://wikiblocksalpha.elasticbeanstalk.com";
+	// var base = "http://wikiblocksalpha.elasticbeanstalk.com";
+	var base = "http://127.0.0.1:3000";
+
 
 	var havePage = function(message, sender, sendResponse) {
 		showPageAction(sender.tab.id, null, sender.tab);
@@ -151,7 +153,7 @@
 
 	function errorMessage(code) {
 		var m = {
-			0  : "There was a problem connecting to the server.",
+			0  : "There was a problem connecting to the server (Chrome permissions)",
 			500: "The server encountered an unexpected error.",
 			502: "There was a problem connecting to the server.",
 			503: "The server is overloaded.",

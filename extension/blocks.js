@@ -12,49 +12,34 @@
 	elements are rendered after the DOM has initially loaded (e.g., .gist-readme). 
 */
 
-var doc = document.documentElement,
-	gist = {
-		gistid: null,
-		username: null,
-		description: null
-	},
-	config = {
+var	config = {
 		childList: true,
 		subtree: true
 	};
 
 var observer = new MutationObserver(function(mutations) {
-	console.log("****")
-	mutations.forEach(function(mutation) {
-    	console.log(mutation.target);
-  	});
+	update();
 });
 
-observer.observe(doc, config);
+observer.observe(document.documentElement, config);
 
+var body = d3.select('body');
 
-// chrome.runtime.sendMessage({method:"foundGist", gist: gist}, function(result) {
-// 	indicateSuccess(!result.error && result.success);
-// 	console.log("result:", result);
-// });
+function update() {
 
-var handlers = {
-	'.gist-readme': links
-}
+	var description = body.select('h1').filter('h1:not(.recorded)').classed('recorded', true);
 
-function classify(g) {
-	return 
-}
+	var path = location.pathname.substring(1).split("/")
+      	username = path[0],
+     	gistid = path[1],
+     	sha = path[2]; // TODO
 
-function description(g) {
-	return g.select('h1').text();
-}
+    var tags = [],
+    	categories = [];
 
-function links(g) {
-	var links = g.select('.gist-readme').selectAll('a')
+	var links = body.select('.gist-readme').selectAll('a').filter('a:not(.recorded)')
 					.each(function(d) {
 						var href = d3.select(this).attr('href');
-						console.log(href);
 						if(href.indexOf('en.wikipedia.org/wiki/') >= 0) {
 							var components = href.split("/");
 							var tokens = decodeURIComponent(components[components.length-1]).split("_");
@@ -62,16 +47,26 @@ function links(g) {
 						}
 	});
 
-	return links;
+	links.classed('recorded', true).classed('wiki', function(d) {
+		return d3.select(this).attr('href').indexOf('en.wikipedia.org/wiki/') >= 0
+	});
+
+	var gist = {
+		description: (description.size()) ? description.text() : "",
+		username: (description.size()) ? username : "",
+		gistid: gistid,
+		tags: tags,
+		categories: categories
+	}
+
+	console.log(JSON.stringify(gist, null, 4));
+
+	chrome.runtime.sendMessage({method:"foundGist", gist: gist}, function(result) {
+		// must not observe our own mutations
+		//indicateSuccess(!result.error && result.success);
+	});
 }
 
-function id() {
-	return document.location.href.split("/")[4];
-}
-
-function username() {
-	return document.location.href.split("/")[3];
-}
 
 // green checkmark if gist updated/inserted successfully, or red 'X' if there is a server error
 function indicateSuccess(success) {
