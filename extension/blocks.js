@@ -14,11 +14,14 @@ var	doc = document.documentElement,
 	},
 	tagged = {
 		"wikipedia": wikipediaTags,
-		"wikibooks": wikibooksTags
+		"wikibooks": wikibooksTags,
+		"ocks": ocksTags
 	},
 	categorized = {
 		"wikipedia": wikipediaCategories,
-		"wikibooks": wikibooksCategories
+		"wikibooks": wikibooksCategories,
+		"ocks": ocksCategories
+
 	};
 
 var originRE = new RegExp(Object.keys(origins).join("|"), 'gi');
@@ -124,6 +127,16 @@ function wikibooksCategories(href) {
 	var components = path(href).split("/");
 	var strings = decodeURIComponent(components.slice(2, -1));
 	return strings;
+}
+
+function ocksTags(href) {
+	// no categories in URL
+	return [];
+}
+
+function ocksCategories(href) {
+	// no categories in URL
+	return [];
 }
 
 function path(href) {
