@@ -75,13 +75,13 @@ function update(targets) {
 
 	// record in database if there is ANY new information
 	if(Object.keys(gist).length > 1) {
-		chrome.runtime.sendMessage({method:"foundGist", gist: gist}, function(result) {
-			observer.disconnect();
-			// TODO indicate successful recording of information from each rendered section
-			console.log("recorded data for gist:\n" + JSON.stringify(gist, null, 4));
-			console.log(result);
-			observer.observe(doc, config);
-		});
+		console.log("recorded data for gist:\n" + JSON.stringify(gist, null, 4));
+		// chrome.runtime.sendMessage({method:"foundGist", gist: gist}, function(result) {
+		// 	observer.disconnect();
+		// 	// TODO indicate successful recording of information from each rendered section
+		// 	console.log(result);
+		// 	observer.observe(doc, config);
+		// });
 	}
 }
 

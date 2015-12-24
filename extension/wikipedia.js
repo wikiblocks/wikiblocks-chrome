@@ -1,6 +1,6 @@
-/*
-	Copyright 2015, Brooks Mershon
-*/
+/**
+ *	Copyright 2015, Brooks Mershon
+ */
 
 window.onload = function() {
 
@@ -54,6 +54,10 @@ window.onload = function() {
 	if(aliasesArr.length) page.aliases = aliasesArr;
 	if(seeAlsoArr.length) page.see_also = seeAlsoArr;
 	if(categoriesArr.length) page.categories = categoriesArr;
+
+	title.classed('wiki-title', true);
+	seeAlsoLinks.classed('wiki-see-also', true);
+	categoryLinks.classed('wiki-category', true);
 		
 	if(page.title) {
 		chrome.runtime.sendMessage({method:"havePage"});

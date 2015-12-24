@@ -6,9 +6,10 @@
   "version": "1.0",
 	"content_scripts": [
 		{
-    	"matches": ["https://en.wikipedia.org/wiki/*"],
-      "exclude_matches": ["https://en.wikipedia.org/wiki/Main_Page", "https://en.wikipedia.org/wiki/*:*"],
-			"js": ["d3.js", "content.js"],
+    	"matches": ["https://*.wikipedia.org/wiki/*", "https://*.wikibooks.org/wiki/*"],
+      // "exclude_matches": ["https://*.wikipedia.org/wiki/Main_Page", "https://en.wikipedia.org/wiki/*:*"],
+			"js": ["d3.js", "wikipedia.js"],
+      "css": ["wikipedia.css"],
       "run_at": "document_end"
 		},
     {
