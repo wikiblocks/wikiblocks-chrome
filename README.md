@@ -3,7 +3,7 @@ wikiblocks-chrome
 
 Copyright 2015, Brooks Mershon
 
-*This is a prototype Chrome extension under active development.*
+*This is a prototype Chrome extension developed for CS 316 (Database Systems) taught at Duke University in Fall 2015*
 
 The extension uses information from a **Wikipedia** article to produce a list of relevant GitHub Gists (known as blocks) in the form of Mike Bostock's [many code examples](http://bl.ocks.org).
 
